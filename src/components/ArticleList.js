@@ -4,6 +4,7 @@ import { Article } from "./Article";
 import moment from "moment";
 import Moment from "react-moment";
 import DateFilter from "./DateFilter";
+import PropTypes from "prop-types";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -31,6 +32,15 @@ export default class ArticleList extends React.Component {
     this.handleChangeStart.bind(this);
     this.handleChangeEnd.bind(this);
   }
+
+  static defaultProps = {
+      articles: []
+  };
+
+  static propTypes = {
+      articles: PropTypes.array,
+      handleArticleFilter: PropTypes.func.isRequired
+  };
 
   render() {
     let options = this.props.articles.map(article => ({

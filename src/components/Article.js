@@ -1,6 +1,7 @@
 import * as React from "react";
 import Moment from "react-moment";
 import { CommentList } from "./CommentList";
+import PropTypes from 'prop-types';
 
 export class Article extends React.PureComponent {
   constructor(props) {
@@ -10,6 +11,17 @@ export class Article extends React.PureComponent {
       isCommentsDisplay: false
     };
   }
+
+  static defaultProps = {
+      article: [],
+      isOpen: false,
+  };
+
+  static propTypes = {
+      article: PropTypes.array,
+      isOpen: PropTypes.bool.isRequired,
+      toggleVisibility: PropTypes.func.isRequired
+  };
 
   render() {
     console.log("R");

@@ -5,24 +5,31 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export class CommentList extends React.Component {
     static defaultProps = {
-        comments: []
+        comments: [],
+        isCommentsDisplay: false
     };
 
     static propTypes = {
-        comments: PropTypes.array
+        comments: PropTypes.array,
+        toggleCommentsDisplay: PropTypes.func.isRequired,
+        isCommentsDisplay: PropTypes.bool
     };
   render() {
       let {comments} = this.props;
     return (
       <div className="my-3">
-          <h5 className="d-inline-block">Комментарии</h5>
-          {comments.length ?
-              <button className="p-1 ml-3 d-inline-block" onClick={this.props.toggleCommentsDisplay}>
-                  {this.props.isCommentsDisplay ? "Скрыть" : "Показать"}
-              </button> : <span className="text-muted small pl-3">нет комментариев</span>
-          }
+          <header>
+              <h5 className="d-inline-block">Комментарии</h5>
+              {comments.length ?
+                  <button className="p-1 ml-3 d-inline-block" onClick={this.props.toggleCommentsDisplay}>
+                      {this.props.isCommentsDisplay ? "Скрыть" : "Показать"}
+                  </button> :
+                  <span className="text-muted small pl-3">нет комментариев</span>
+              }
+          </header>
+
           <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-          {(this.props.isCommentsDisplay) ? comments.map(comment => (<Comment key={comment.id} comment={comment} />)) : null }
+          {this.props.isCommentsDisplay ? comments.map(comment => (<Comment key={comment.id} comment={comment} />)) : null }
           </ReactCSSTransitionGroup>
       </div>
     );
