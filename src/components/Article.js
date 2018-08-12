@@ -27,22 +27,17 @@ export class Article extends React.PureComponent {
           >
             {isOpen ? "Закрыть" : "Открыть"}
           </button>
-          <button
-            className="p-1 ml-3 d-inline-block"
-            onClick={this.toggleCommentsDisplay}
-          >
+          <button disabled={(article.comments) ? '' : 'disabled'} className="p-1 ml-3 d-inline-block" onClick={this.toggleCommentsDisplay}>
             {this.state.isCommentsDisplay ? "Скрыть" : "Показать"} комментарии
           </button>
         </header>
         <div className="card-body">
           {isOpen ? <p>{article.text}</p> : null}
-          {article.comments && this.state.isCommentsDisplay ? (
-            <CommentList
-              comments={article.comments}
-              isCommentsDisplay={this.state.isCommentsDisplay}
-              toggleCommentsDisplay={this.toggleCommentsDisplay}
-            />
-          ) : null}
+          <CommentList
+            comments={article.comments}
+            isCommentsDisplay={this.state.isCommentsDisplay}
+            toggleCommentsDisplay={this.toggleCommentsDisplay}
+          />
         </div>
       </li>
     );
